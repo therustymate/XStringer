@@ -13,12 +13,12 @@ XStringer is an automated XOR obfuscated string encoder designed to automaticall
 The ultimate goal of this project is to develop an automated XOR obfuscator to protect sensitive string data within a binary.
 
 ## Scope
-The scope of this project covers **binaries/scripts written in:**
+The scope of this project covers **binaries and scripts written in:**
 * C/C++
 * Python
 * PowerShell
 
-The outcome of this project will be tested on the binaries for the following operating systems:
+The outcome of this project will be tested on the binaries and scripts for the following operating systems:
 * Windows 10
 * Ubuntu Linux
 
