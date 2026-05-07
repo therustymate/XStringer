@@ -15,7 +15,8 @@ The ultimate goal of this project is to develop an automated XOR obfuscator to p
 ## Scope
 The scope of this project covers **binaries/scripts written in:**
 * C/C++
-* 
+* Python
+* PowerShell
 
 ## Usage
 ```bash
