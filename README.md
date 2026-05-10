@@ -7,10 +7,10 @@ This project and all associated materials are provided **strictly for authorized
 This project declares that **it is NOT intended to hinder malware analysis or disrupt DFIR.**
 
 ## Executive Summary
-XStringer is an automated XOR obfuscated string encoder designed to automatically convert plain strings into a XOR obfuscated strings, ultimately to protect string data within a binary from being analyzed through reverse engineering software (e.g. IDA Free, Ghidra, Binary Ninja).
+XStringer is an automated XOR obfuscated string encoder designed to automatically convert plain strings into a XOR obfuscated strings, ultimately to protect string data within a binary/script from being analyzed through reverse engineering software (e.g. IDA Free, Ghidra, Binary Ninja).
 
 ## Purpose
-The ultimate goal of this project is to develop an automated XOR obfuscator to protect sensitive string data within a binary.
+The ultimate goal of this project is to develop an automated XOR obfuscator to protect sensitive string data within a binary/script.
 
 ## Scope
 The scope of this project covers **binaries and scripts written in:**
@@ -41,3 +41,26 @@ The outcome of this project will be tested on the binaries and scripts for the f
 * Ubuntu Compiler
   * Ubuntu clang version 18.1.3 (1ubuntu1)
     * `clang -O2 -s -fvisibility=hidden [C_CODE] -o [OUTPUT]`
+
+## Methodology
+
+### Fundamental Concepts & Definitions
+Previous work done in: [therustymate/BRKDEC](https://github.com/therustymate/BRKDEC#fundamental-concepts--definitions)
+
+### Techniques & Strategies
+Previous work done in: [https://github.com/therustymate/BRKDEC#techniques--strategies](https://github.com/therustymate/BRKDEC#techniques--strategies)
+
+**Commercial decompilers often cannot precisely determine runtime-dependent values** (e.g., return addresses, timestamps, or environment-dependent data). As decompilers heavily rely on the CFG, **conditional branches that depend on runtime values can be exploited to distort CFG reconstruction, resulting in misleading or junk decompiled output.**
+
+### Validation Method
+
+
+
+### Validation Standards
+
+### Validation Assumption
+* The compiled binary does not contain debug symbols
+* The compiled binary is built with recommended optimizations (-O2)
+
+
+## Research
