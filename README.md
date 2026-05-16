@@ -1,5 +1,5 @@
 # XStringer
-Automated XOR Obfuscated String Encoder
+Automated Semi-Polymorphic XOR Obfuscated String Encoder
 
 ## Disclaimer
 This project and all associated materials are provided **strictly for authorized red teaming and educational and research purposes only.**
@@ -13,12 +13,13 @@ XStringer is an automated XOR obfuscated string encoder designed to automaticall
 The ultimate goal of this project is to develop an automated XOR obfuscator to protect sensitive string data within a binary/script.
 
 ## Scope
-The scope of this project covers **binaries and scripts written in:**
-* C/C++
-* Python
+The scope of this project covers **binaries/scripts written in:**
+* C
+* C++
 * PowerShell
+* Bash
 
-The outcome of this project will be tested on the binaries and scripts for the following operating systems:
+The outcome of this project will be tested on the binaries/scripts for the following operating systems:
 * Windows 10
 * Ubuntu Linux
 
@@ -42,25 +43,9 @@ The outcome of this project will be tested on the binaries and scripts for the f
   * Ubuntu clang version 18.1.3 (1ubuntu1)
     * `clang -O2 -s -fvisibility=hidden [C_CODE] -o [OUTPUT]`
 
-## Methodology
+## Usage
+```bash
 
-### Fundamental Concepts & Definitions
-Previous work done in: [therustymate/BRKDEC](https://github.com/therustymate/BRKDEC#fundamental-concepts--definitions)
+```
 
-### Techniques & Strategies
-Previous work done in: [https://github.com/therustymate/BRKDEC#techniques--strategies](https://github.com/therustymate/BRKDEC#techniques--strategies)
-
-**Commercial decompilers often cannot precisely determine runtime-dependent values** (e.g., return addresses, timestamps, or environment-dependent data). As decompilers heavily rely on the CFG, **conditional branches that depend on runtime values can be exploited to distort CFG reconstruction, resulting in misleading or junk decompiled output.**
-
-### Validation Method
-
-
-
-### Validation Standards
-
-### Validation Assumption
-* The compiled binary does not contain debug symbols
-* The compiled binary is built with recommended optimizations (-O2)
-
-
-## Research
+## 
