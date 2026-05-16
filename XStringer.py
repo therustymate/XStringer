@@ -10,6 +10,7 @@ def main(**kwargs):
     selected_lang   = str(kwargs["lang"])
     repeat          = int(kwargs["repeat"])
     string          = str(kwargs["string"])
+    output          = str(kwargs["output"])
 
     result          = []
     algorithm       = []
@@ -84,6 +85,8 @@ def main(**kwargs):
 
     print(f"[+] Encoded String: {' '.join(hex(x) for x in result)}")
 
+    final_code = ""
+
     if selected_lang == "c" or selected_lang == "cplusplus":
         encoded_string = ", ".join(f"0x{x & 0xff:02x}" for x in result)
         algorithm_code = ""
@@ -119,9 +122,15 @@ def main(**kwargs):
 
         final_code += f"encoded_string[{len(string)}] = 0x00;"
 
-        print()
-        print("[+] Generated Code:")
-        print(final_code)
+    print()
+    print("[+] Generated Code:")
+    print(final_code)
+
+    if output != "":
+        with open(output, "w") as f:
+            f.write(final_code)
+        f.close()
+        print(f"[+] Output saved to: {output}")
 
 if __name__ == "__main__":
     parser = ArgumentParser(
@@ -142,6 +151,13 @@ if __name__ == "__main__":
         type=int,
         required=False,
         default=2
+    )
+    parser.add_argument(
+        "-o", "--output",
+        help="Output file to save the generated code (optional)",
+        type=str,
+        required=False,
+        default=""
     )
     parser.add_argument(
         "string",
