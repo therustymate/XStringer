@@ -134,7 +134,7 @@ def main(**kwargs):
             f"volatile unsigned char {name}[{len(string) + 1}] = "
             "{" + f"{encoded_string}, 0x00" + "}; \n"
         )
-        final_code += "for (int i = 0; i < [ACTUAL_LENGTH]; i++) {\n"
+        final_code += "for (volatile int i = 0; i < [ACTUAL_LENGTH]; i++) {\n"
         final_code += f"{INDENT}switch (i) {{\n"
         idx = 0
         actual_length = 0
