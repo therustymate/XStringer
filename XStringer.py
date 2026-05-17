@@ -5,11 +5,14 @@ import os
 import sys
 
 SUPPORTED_LANGUAGES = ["c", "cplusplus", "powershell", "bash"]
+INDENT = " " * 4
 
 def main(**kwargs):
     selected_lang   = str(kwargs["lang"])
     repeat          = int(kwargs["repeat"])
+    blocksize       = int(kwargs["block_size"])
     string          = str(kwargs["string"])
+    name            = str(kwargs["name"])
     output          = str(kwargs["output"])
 
     result          = []
@@ -17,39 +20,63 @@ def main(**kwargs):
 
     print(f"[+] Selected Language: {selected_lang}")
     print(f"[+] Repeat Count: {repeat}")
+    print(f"[+] Block Size: {blocksize}")
     print(f"[+] String: {string}")
 
     print()
 
     print("[+] Generating encryption algorithm...")
-    for i in range(repeat):
+    for i in range(repeat * blocksize):
         mode = random.choice([
             "xor",
             "add",
             "sub",
             "mul",
-            ""
+            "swap"
         ])
 
-        index = [str(f"i{j}") for j in range(len(string))]
-
         if mode == "xor":
-            target = random.choice(index)
+            target = random.randint(0, len(string) - 1)
             key = random.randint(1, 255)
-            algorithm.append(f"xor {target}, {hex(key)}")
+            algorithm.append({
+                "op": "xor",
+                "target": target,
+                "key": key
+            })
         elif mode == "add":
-            target = random.choice(index)
+            target = random.randint(0, len(string) - 1)
             key = random.randint(1, 255)
-            algorithm.append(f"add {target}, {hex(key)}")
+            algorithm.append({
+                "op": "add",
+                "target": target,
+                "key": key
+            })
         elif mode == "sub":
-            target = random.choice(index)
+            target = random.randint(0, len(string) - 1)
             key = random.randint(1, 255)
-            algorithm.append(f"sub {target}, {hex(key)}")
+            algorithm.append({
+                "op": "sub",
+                "target": target,
+                "key": key
+            })
         elif mode == "mul":
-            target = random.choice(index)
+            target = random.randint(0, len(string) - 1)
             key = random.choice(range(1, 256, 2))
-            algorithm.append(f"mul {target}, {hex(key)}")
-
+            algorithm.append({
+                "op": "mul",
+                "target": target,
+                "key": key
+            })
+        elif mode == "swap":
+            target1 = random.randint(0, len(string) - 1)
+            target2 = random.randint(0, len(string) - 1)
+            while target2 == target1:
+                target2 = random.randint(0, len(string) - 1)
+            algorithm.append({
+                "op": "swap",
+                "target": target1,
+                "key": target2
+            })
     print("[+] Generated Algorithm:")
     for step in algorithm:
         print(f"\t- {step}")
@@ -62,27 +89,26 @@ def main(**kwargs):
     result = [ord(string[i]) for i in range(len(string))]
     
     for step in algorithm:
-        if step.startswith("xor"):
-            target = int(str(step.split(" ")[1])[1:-1])
-            key = int(step.split(", ")[1], 16)
-            print(f"\t- Applying XOR on target: {target} with key: {hex(key)}")
+        if step["op"] == "xor":
+            target = step["target"]
+            key = step["key"]
             result[target] = result[target] ^ key
-        elif step.startswith("add"):
-            target = int(str(step.split(" ")[1])[1:-1])
-            key = int(step.split(", ")[1], 16)
-            print(f"\t- Applying ADD on target: {target} with key: {hex(key)}")
-            result[target] = result[target] + key
-        elif step.startswith("sub"):
-            target = int(str(step.split(" ")[1])[1:-1])
-            key = int(step.split(", ")[1], 16)
-            print(f"\t- Applying SUB on target: {target} with key: {hex(key)}")
-            result[target] = result[target] - key
-        elif step.startswith("mul"):
-            target = int(str(step.split(" ")[1])[1:-1])
-            key = int(step.split(", ")[1], 16)
-            print(f"\t- Applying MUL on target: {target} with key: {hex(key)}")
+        elif step["op"] == "add":
+            target = step["target"]
+            key = step["key"]
+            result[target] = (result[target] + key) & 0xff
+        elif step["op"] == "sub":
+            target = step["target"]
+            key = step["key"]
+            result[target] = (result[target] - key) & 0xff
+        elif step["op"] == "mul":
+            target = step["target"]
+            key = step["key"]
             result[target] = (result[target] * key) & 0xff
-
+        elif step["op"] == "swap":
+            target1 = step["target"]
+            target2 = step["key"]
+            result[target1], result[target2] = result[target2], result[target1]
     print(f"[+] Encoded String: {' '.join(hex(x) for x in result)}")
 
     final_code = ""
@@ -94,43 +120,68 @@ def main(**kwargs):
             algorithm_code += f"unsigned char i{i} = {hex(ord(string[i]))}; "
 
         final_code = (
-            f"volatile unsigned char encoded_string[{len(string) + 1}] = "
-            "{" + f"{encoded_string}, 0x00" + "}; "
+            f"volatile unsigned char {name}[{len(string) + 1}] = "
+            "{" + f"{encoded_string}, 0x00" + "}; \n"
         )
-        for step in reversed(algorithm):
-            if step.startswith("xor"):
-                target = int(step.split(" ")[1][1:-1])
-                key = step.split(", ")[1]
-                final_code += f"encoded_string[{target}] ^= {key}; "
+        final_code += "for (int i = 0; i < [ACTUAL_LENGTH]; i++) {\n"
+        final_code += f"{INDENT}switch (i) {{\n"
+        idx = 0
+        actual_length = 0
 
-            elif step.startswith("add"):
-                target = int(step.split(" ")[1][1:-1])
-                key = step.split(", ")[1]
-                final_code += f"encoded_string[{target}] = "
-                final_code += f"(encoded_string[{target}] - {key}) & 0xff; "
+        for i in reversed(range(0, repeat * blocksize, blocksize)):
+            actual_length += 1
+            final_code += f"{INDENT}{INDENT}case {idx}: "
+            block = algorithm[i:i + blocksize]
+            for step in reversed(block):
+                if step["op"] == "xor":
+                    target = step["target"]
+                    key = step["key"]
+                    final_code += f"{name}[{target}] ^= {key}; "
 
-            elif step.startswith("sub"):
-                target = int(step.split(" ")[1][1:-1])
-                key = step.split(", ")[1]
-                final_code += f"encoded_string[{target}] = "
-                final_code += f"(encoded_string[{target}] + {key}) & 0xff; "
-            elif step.startswith("mul"):
-                target = int(step.split(" ")[1][1:-1])
-                key = int(step.split(", ")[1], 16)
-                inv = pow(key, -1, 256)
-                final_code += f"encoded_string[{target}] = (encoded_string[{target}] * 0x{inv:02x}) & 0xff; "
+                elif step["op"] == "add":
+                    target = step["target"]
+                    key = step["key"]
+                    final_code += f"{name}[{target}] = "
+                    final_code += f"({name}[{target}] - {key}) & 0xff; "
 
-        final_code += f"encoded_string[{len(string)}] = 0x00;"
+                elif step["op"] == "sub":
+                    target = step["target"]
+                    key = step["key"]
+                    final_code += f"{name}[{target}] = "
+                    final_code += f"({name}[{target}] + {key}) & 0xff; "
+                
+                elif step["op"] == "mul":
+                    target = step["target"]
+                    key = step["key"]
+                    inv = pow(key, -1, 256)
+                    final_code += f"{name}[{target}] = ({name}[{target}] * 0x{inv:02x}) & 0xff; "
+                
+                elif step["op"] == "swap":
+                    target = step["target"]
+                    key = step["key"]
+                    final_code += f"{name}[{target}] = {name}[{target}] ^ {name}[{key}]; "
+                    final_code += f"{name}[{key}] = {name}[{target}] ^ {name}[{key}]; "
+                    final_code += f"{name}[{target}] = {name}[{target}] ^ {name}[{key}]; "
+                    
+            final_code += "break;\n"
+            idx += 1
 
-    print()
-    print("[+] Generated Code:")
-    print(final_code)
+        final_code += f"{INDENT}}}\n"
+        final_code += "}\n"
+
+        final_code += f"{name}[{len(string)}] = 0x00;"
+
+        final_code = final_code.replace("[ACTUAL_LENGTH]", str(actual_length))
 
     if output != "":
         with open(output, "w") as f:
             f.write(final_code)
         f.close()
         print(f"[+] Output saved to: {output}")
+    else:
+        print()
+        print("[+] Generated Code:")
+        print(final_code)
 
 if __name__ == "__main__":
     parser = ArgumentParser(
@@ -153,11 +204,25 @@ if __name__ == "__main__":
         default=2
     )
     parser.add_argument(
+        "-b", "--block-size",
+        help="Block size for encoding (default: 1)",
+        type=int,
+        required=False,
+        default=1
+    )
+    parser.add_argument(
         "-o", "--output",
         help="Output file to save the generated code (optional)",
         type=str,
         required=False,
         default=""
+    )
+    parser.add_argument(
+        "-n", "--name",
+        help="The name of the encoded string variable (optional, default: 'encoded_string')",
+        type=str,
+        required=False,
+        default="encoded_string"
     )
     parser.add_argument(
         "string",
