@@ -1,8 +1,5 @@
-<div align="center">
-    <img src="./rsrc/icon.png" width="30%">
-    <h1>XStringer</h1>
-    <h3>Automated Semi-Polymorphic String Obfuscator</h3>
-</div>
+# XStringer
+Automated Semi-Polymorphic String Obfuscator
 
 ## Disclaimer
 This project and all associated materials are provided **strictly for authorized red teaming and educational and research purposes only.**
