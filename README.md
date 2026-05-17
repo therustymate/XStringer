@@ -37,7 +37,24 @@ The outcome of this project will be tested on the binaries/scripts for the follo
 
 ## Usage
 ```bash
+usage: XStringer [-h] [-l {c,cplusplus,powershell,bash}] [-r REPEAT] [-b BLOCK_SIZE] [-o OUTPUT] [-n NAME] string
 
+Automated XOR Obfuscated String Encoder
+
+positional arguments:
+  string                The string to be encoded
+
+options:
+  -h, --help            show this help message and exit
+  -l {c,cplusplus,powershell,bash}, --lang {c,cplusplus,powershell,bash}
+                        Programming language to generate the encoded string for (e.g., c, cplusplus, etc.)
+  -r REPEAT, --repeat REPEAT
+                        Number of times to repeat the encoded string (default: 2)
+  -b BLOCK_SIZE, --block-size BLOCK_SIZE
+                        Block size for encoding (default: 1)
+  -o OUTPUT, --output OUTPUT
+                        Output file to save the generated code (optional)
+  -n NAME, --name NAME  The name of the encoded string variable (optional, default: 'encoded_string')
 ```
 
 ## Reference
