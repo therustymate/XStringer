@@ -39,7 +39,7 @@ The outcome of this project will be tested on the binaries/scripts for the follo
 ```bash
 usage: XStringer [-h] [-l {c,cplusplus,powershell,bash}] [-r REPEAT] [-b BLOCK_SIZE] [-o OUTPUT] [-n NAME] string
 
-Automated XOR Obfuscated String Encoder
+Automated Semi-Polymorphic String Obfuscator
 
 positional arguments:
   string                The string to be encoded

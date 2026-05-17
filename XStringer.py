@@ -204,7 +204,7 @@ def main(**kwargs):
 if __name__ == "__main__":
     parser = ArgumentParser(
         prog="XStringer",
-        description="Automated XOR Obfuscated String Encoder"
+        description="Automated Semi-Polymorphic String Obfuscator"
     )
     parser.add_argument(
         "-l", "--lang",
