@@ -23,7 +23,13 @@ def main(**kwargs):
     print(f"[+] Block Size: {blocksize}")
     print(f"[+] String: {string}")
 
+        
+      
     print()
+    print("-" * 50)
+    print()
+
+
 
     print("[+] Generating encryption algorithm...")
     for i in range(repeat * blocksize):
@@ -77,13 +83,18 @@ def main(**kwargs):
                 "target": target1,
                 "key": target2
             })
+
     print("[+] Generated Algorithm:")
     for step in algorithm:
         print(f"\t- {step}")
+
+
       
     print()
     print("-" * 50)
     print()
+
+
 
     print("[+] Generating encoded string...")
     result = [ord(string[i]) for i in range(len(string))]
@@ -172,6 +183,13 @@ def main(**kwargs):
         final_code += f"{name}[{len(string)}] = 0x00;"
 
         final_code = final_code.replace("[ACTUAL_LENGTH]", str(actual_length))
+        
+      
+    print()
+    print("-" * 50)
+    print()
+
+
 
     if output != "":
         with open(output, "w") as f:
