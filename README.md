@@ -104,7 +104,7 @@ In the case of GPT 5.5, the AI model took **55 seconds to think and 65.19 second
 ### Gemini 3
 Effectiveness: **over 70%**
 
-In the case of Gemini 3, the AI model took **43 seconds to fully answer** to the request. **The recovery was failed**
+In the case of Gemini 3, the AI model took **43 seconds to fully answer** to the request. **The recovery was failed.**
 
 ![GEM3](./rsrc/GEM3.png)
 
