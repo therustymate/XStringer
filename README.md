@@ -143,9 +143,9 @@ In the case of Deepseek, the AI model took **583.74 seconds to fully answer** to
 ---
 
 ### Summary
-`GPT 5.5` and `Deepseek DeepThink` showed meaningful outcome in reverse engineering polymorphic algorithms and decoding obfuscated strings on assembly level. In general, default models (often called `fast`) showed poor speed and accuracy on deobfuscation.
+`GPT 5.5` and `Deepseek DeepThink` showed meaningful outcomes in reverse engineering polymorphic algorithms and decoding obfuscated strings on assembly level. In general, default models (often called `fast`) showed poor speed and accuracy on deobfuscation.
 
-Note: Potentially, reverse engineering ability of Grok can be dependent on their license (paid). As Gemini 3 models were not fully tested, it is possible that these models are potentially capable to effectively deobfuscate encoded strings.
+Note: Potentially, reverse engineering ability of Grok can be dependent on their (paid) license. As Gemini 3 models were not fully tested, it is possible that these models are potentially capable to effectively deobfuscate encoded strings.
 
 
 ## Limitations
