@@ -94,49 +94,37 @@ When the decompiler was set to `Pseudo C` mode, automatic string recovery (via d
 ---
 
 ### GPT 5.5
-Effectiveness: **less than 10%**
-
 In the case of GPT 5.5, the AI model took **55 seconds to think and 65.19 seconds to fully answer** to the request. **The recovery was successful.**
 
 ![GPT5](./rsrc/GPT5.png)
 
 
 ### Gemini 3
-Effectiveness: **over 70%**
-
 In the case of Gemini 3, the AI model took **43 seconds to fully answer** to the request. **The recovery was failed.**
 
 ![GEM3](./rsrc/GEM3.png)
 
 #### Gemini 3 Thinking
-Effectiveness: **over 90% OR unknown**
-
 In the case of Gemini 3 Thinking, the AI model timed out. **The recovery was failed.**
 
 #### Gemini 3 Pro
-Effectiveness: **over 90% OR unknown**
+In the case of Gemini 3 Pro, the AI model took **99.99 seconds to fully answer** to the request. **The recovery was successful.**
 
-In the case of Gemini 3 Pro, the AI model timed out. **The recovery was failed.**
+![GEM3PRO](./rsrc/GEM3PRO.png)
 
 
 ### Grok Free Tier
-Effectiveness: **over 90%**
-
 In the case of Grok Free Tier, the AI model took **14 seconds to think and 20.2 seconds to fully answer** to the request. **The recovery was failed.**
 
 ![GROK](./rsrc/GROK.png)
 
 
 ### Deepseek
-Effectiveness: **over 90%**
-
 In the case of Deepseek, the AI model took **72.34 seconds to fully answer** to the request. **The recovery was failed.**
 
 ![DEEPSEEK](./rsrc/DEEPSEEK.png)
 
 #### Deepseek DeepThink
-Effectiveness: **approximately 60%**
-
 In the case of Deepseek, the AI model took **583.74 seconds to fully answer** to the request. **The recovery was successful.**
 
 ![DEEPTHINK](./rsrc/DEEPTHINK.png)
