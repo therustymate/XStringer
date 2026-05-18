@@ -68,7 +68,7 @@ options:
 * The compiled binary is built with recommended optimizations (-O2)
 
 ### Validation Methods
-For a quick validation, a simple `printf` sample written in C will be compiled with recommended optimization level (-O2) and will be reverse engineered using Binary Ninja. Throughout this process, pseudocode readability and automatic string recovery result will be tested. Additionally, the assembly instructions will be provided to the following generative AI models:
+For a quick validation, a simple `printf` sample written in C will be compiled with recommended optimization (-O2) and will be reverse engineered using Binary Ninja. Throughout this process, pseudocode readability and automatic string recovery result will be tested. Additionally, the assembly instructions will be provided to the following generative AI models:
 * GPT 5.5
 * Gemini 3
 * Grok Free Tier
