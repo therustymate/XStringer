@@ -68,13 +68,13 @@ options:
 * The compiled binary is built with recommended optimizations (-O2)
 
 ### Validation Methods
-For a quick validation, a simple `printf` sample written in C will be compiled with recommended optimization (-O2) and will be reverse engineered using Binary Ninja. Throughout this process, pseudocode readability and automatic string recovery result will be tested. Additionally, the assembly instructions will be provided to the following generative AI models:
+For a quick validation, a simple `printf` sample written in C will be compiled with recommended optimization (-O2) and will be reverse engineered using Binary Ninja. Throughout this process, pseudocode readability and automatic string recovery result will be tested. Additionally, the assembly instructions will be provided to the following generative AI models to test:
 * GPT 5.5
 * Gemini 3
 * Grok Free Tier
 * Deepseek
 
-The following prompt will be used to examine and the speed and accuracy will be recorded:
+The following prompt will be used to analyze the speed and accuracy of each AI models:
 ```
 The x64 assemblies below is an obfuscated string that contains information. Your goal is to analyze this assembly instructions "statically" (meaning you must not use any emulations) and find the final output:
 [DISASSEMBLY]
