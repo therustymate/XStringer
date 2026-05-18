@@ -7,17 +7,17 @@ This project and all associated materials are provided **strictly for authorized
 This project declares that **it is NOT intended to hinder malware analysis or disrupt DFIR.**
 
 ## Executive Summary
-XStringer is an automated semi-polymorphic string obfuscator designed to automatically convert plain strings into a semi-polymorphic obfuscated strings, ultimately to protect string data within a binary/script from being analyzed through reverse engineering software (e.g. IDA Free, Ghidra, Binary Ninja).
+XStringer is an automated semi-polymorphic string obfuscator designed to automatically convert plain strings into a semi-polymorphic obfuscated strings, ultimately to protect string data within a binary from being analyzed through reverse engineering software (e.g. IDA Free, Ghidra, Binary Ninja).
 
 ## Purpose
 The ultimate goal of this project is to **develop an automated semi-polymorphic obfuscator** to protect sensitive string data within a binary/script and **examine the effectiveness of the obfuscation specifically on the automatic string recovery on commerical decompilers**.
 
 ## Scope
-The scope of this project covers **binaries/scripts written in:**
+The scope of this project covers **source codes written in:**
 * C
 * C++
 
-The outcome of this project will be tested on the binaries/scripts for the following operating systems:
+The outcome of this project will be tested on the binaries for the following operating systems:
 * Ubuntu Linux
 
 ### Dev Environment
