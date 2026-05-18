@@ -107,12 +107,12 @@ In the case of Gemini 3, the AI model took **43 seconds to fully answer** to the
 #### Gemini 3 Thinking
 Effectiveness: **over 90% OR unknown**
 
-In the case of Grok Free Tier, the AI model timed out. **The recovery was failed.**
+In the case of Gemini 3 Thinking, the AI model timed out. **The recovery was failed.**
 
 #### Gemini 3 Pro
 Effectiveness: **over 90% OR unknown**
 
-In the case of Grok Free Tier, the AI model timed out. **The recovery was failed.**
+In the case of Gemini 3 Pro, the AI model timed out. **The recovery was failed.**
 
 
 ### Grok Free Tier
