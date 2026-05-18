@@ -7,10 +7,10 @@ This project and all associated materials are provided **strictly for authorized
 This project declares that **it is NOT intended to hinder malware analysis or disrupt DFIR.**
 
 ## Executive Summary
-XStringer is an automated semi-polymorphic string obfuscator designed to automatically convert plain strings into a XOR obfuscated strings, ultimately to protect string data within a binary/script from being analyzed through reverse engineering software (e.g. IDA Free, Ghidra, Binary Ninja).
+XStringer is an automated semi-polymorphic string obfuscator designed to automatically convert plain strings into a semi-polymorphic obfuscated strings, ultimately to protect string data within a binary/script from being analyzed through reverse engineering software (e.g. IDA Free, Ghidra, Binary Ninja).
 
 ## Purpose
-The ultimate goal of this project is to develop an automated XOR obfuscator to protect sensitive string data within a binary/script.
+The ultimate goal of this project is to **develop an automated semi-polymorphic obfuscator** to protect sensitive string data within a binary/script and **examine the effectiveness of the obfuscation specifically on the automatic string recovery on commerical decompilers**.
 
 ## Scope
 The scope of this project covers **binaries/scripts written in:**
@@ -56,6 +56,87 @@ options:
                         Output file to save the generated code (optional)
   -n NAME, --name NAME  The name of the encoded string variable (optional, default: 'encoded_string')
 ```
+
+## Semi-Research
+
+### Validation Standards
+* Automatic String Recovery
+* Automatic RE using Generative AI
+
+### Validation Assumption
+* The compiled binary does not contain debug symbols
+* The compiled binary is built with recommended optimizations (-O2)
+
+### Validation Methods
+For a quick validation, a simple `printf` sample written in C will be compiled with recommended optimization level (-O2) and will be reverse engineered using Binary Ninja. Throughout this process, pseudocode readability and automatic string recovery result will be tested. Additionally, the assembly instructions will be provided to the following generative AI models:
+* GPT 5.5
+* Gemini 3
+* Grok Free Tier
+* Deepseek
+
+The following prompt will be used to examine and the speed and accuracy will be recorded:
+```
+The x64 assemblies below is an obfuscated string that contains information. Your goal is to analyze this assembly instructions "statically" (meaning you must not use any emulations) and find the final output:
+[DISASSEMBLY]
+```
+
+
+## Validation
+
+### Binary Ninja - Automatic String Recovery
+![BN_result](./rsrc/BN_result.png)
+When the decompiler was set to `Pseudo C` mode, automatic string recovery (via decompiler level optimization or compiler level optimization) was failed and showed `&str` instead which is the obfuscated string variable.
+
+---
+
+### GPT 5.5
+Effectiveness: **less than 10%**
+
+In the case of GPT 5.5, the AI model took **55 seconds to think and 65.19 seconds to fully answer** to the request. **The recovery was successful.**
+
+![GPT5](./rsrc/GPT5.png)
+
+
+### Gemini 3
+Effectiveness: **over 70%**
+
+In the case of Gemini 3, the AI model took **43 seconds to fully answer** to the request. **The recovery was failed**
+
+![GEM3](./rsrc/GEM3.png)
+
+#### Gemini 3 Thinking
+Effectiveness: **over 90% OR unknown**
+
+In the case of Grok Free Tier, the AI model timed out. **The recovery was failed.**
+
+#### Gemini 3 Pro
+Effectiveness: **over 90% OR unknown**
+
+In the case of Grok Free Tier, the AI model timed out. **The recovery was failed.**
+
+
+### Grok Free Tier
+Effectiveness: **over 90%**
+
+In the case of Grok Free Tier, the AI model took **14 seconds to think and 20.2 seconds to fully answer** to the request. **The recovery was failed.**
+
+![GROK](./rsrc/GROK.png)
+
+
+### Deepseek
+Effectiveness: **over 90%**
+
+In the case of Deepseek, the AI model took **72.34 seconds to fully answer** to the request. **The recovery was failed.**
+
+![DEEPSEEK](./rsrc/DEEPSEEK.png)
+
+#### Deepseek DeepThink
+Effectiveness: **approximately 60%**
+
+In the case of Deepseek, the AI model took **583.74 seconds to fully answer** to the request. **The recovery was successful.**
+
+![DEEPTHINK](./rsrc/DEEPTHINK.png)
+
 
 ## Reference
 * [https://www.xn--hy1b43d247a.com/defense-evasion/polymorphic-code](https://www.xn--hy1b43d247a.com/defense-evasion/polymorphic-code)
