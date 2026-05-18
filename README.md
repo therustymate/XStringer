@@ -88,6 +88,7 @@ The x64 assemblies below is an obfuscated string that contains information. Your
 
 ### Binary Ninja - Automatic String Recovery
 ![BN_result](./rsrc/BN_result.png)
+
 When the decompiler was set to `Pseudo C` mode, automatic string recovery (via decompiler level optimization or compiler level optimization) was failed and showed `&str` instead which is the obfuscated string variable.
 
 ---
