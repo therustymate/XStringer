@@ -138,6 +138,7 @@ Note: Potentially, reverse engineering ability of Grok can be dependent on their
 
 
 ## Limitations
+* **Validation Failure**: During the research, it was identified that the GPT model was indeed paid premium version, therefore, the validation process is inaccruate and the examination data was contaminated.
 * **Debugging**: Although it is dependent on the size of the binary, **debugging can expose the encoded strings effortlessly**.
 * **Automatic RE**: As this research suggested, few generative AI models (GPT 5.5 and Deepseek DeepThink) **can statically reverse engineer the polymorphic algorithm to deobfuscate the encoded strings**.
 * **Source Code Complexity**: As the algorithm was automatically generated, **readability of the source code can significantly decrease.**
